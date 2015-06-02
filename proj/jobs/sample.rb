@@ -6,7 +6,7 @@ ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",
   :host     => "localhost",
   :username => "root",
-  :password => "lfl",
+  :password => "superman",
   :database => "ruby"
 )
 
@@ -93,5 +93,5 @@ SCHEDULER.every '2s' do
 
   send_event('valuation', { current: current_valuation, last: last_valuation })
   send_event('karma', { current: current_karma, last: last_karma })
-  send_event('synergy',   { value: rand(100) })
+  send_event('synergy', { value: rand(100) })
 end

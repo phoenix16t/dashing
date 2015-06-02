@@ -1,13 +1,34 @@
+require 'openid/store/filesystem'
+require 'omniauth/strategies/google_apps'
 require 'dashing'
 
 configure do
   set :auth_token, 'YOUR_AUTH_TOKEN'
 
   helpers do
+
     def protected!
-     # Put any authentication code you want in here.
-     # This method is run before accessing any resource.
+      redirect '/auth/g' unless session[:user_id]
     end
+
+  end
+
+  use Rack::Session::Cookie
+  use OmniAuth::Builder do
+    provider :google_apps, :store => OpenID::Store::Filesystem.new('./tmp'), :name => 'g', :domain => 'YOURDOMAIN.com'
+  end
+
+  post '/auth/g/callback' do
+    if auth = request.env['omniauth.auth']
+      session[:user_id] = auth['info']['email']
+      redirect '/'
+    else
+      redirect '/auth/failure'
+    end
+  end
+
+  get '/auth/failure' do
+    'Nope.'
   end
 end
 
@@ -16,13 +37,3 @@ map Sinatra::Application.assets_prefix do
 end
 
 run Sinatra::Application
-
-Sinatra::Application::Aaa = ['
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
-      <div data-id="time" data-view="Clock" data-title="Time" style="background-color:#ff9618"></div>
-    </li>
-',
-'    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$"></div>
-    </li>
-']
