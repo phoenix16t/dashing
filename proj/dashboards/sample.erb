@@ -4,20 +4,23 @@
 
 <a href='.'>reload</a>
 
-<%= test %>
 
 <div class="gridster">
   <ul>
 
-<!--     <li id="test" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="test2" data-view="Test" data-title="Test div" style="background-color:#ff9618"></div>
-    </li> -->
-
-
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
-      <div data-id="test" data-view="Test" data-title="Test div" data-event-click='testFunc'>sldkfjsldkfjsdkfj</div>
-    </li>
-
+    <% DbData.each do |widget| %>
+      <li data-row=<%= widget["dataRow"] %> data-col=<%= widget["dataCol"] %> data-sizex=<%= widget["dataSizex"] %> data-sizey=<%= widget["dataSizey"] %>>
+        <div data-id=<%= widget["dataId"] %> data-view=<%= widget["dataView"] %> data-title=<%= widget["dataTitle"] %>
+          <% if(widget["dataText"]) %> data-text='<%= widget["dataText"] %>' <% end %>
+          <% if(widget["dataMoreinfo"]) %> data-moreinfo='<%= widget["dataMoreinfo"] %>' <% end %>
+          <% if(widget["dataMin"]) %> data-min=<%= widget["dataMin"] %> <% end %>
+          <% if(widget["dataMax"]) %> data-max=<%= widget["dataMax"] %> <% end %>
+          <% if(widget["dataUnordered"]) %> data-unordered=<%= widget["dataUnordered"] %> <% end %>
+          <% if(widget["style"]) %> style='<%= widget["style"] %>' <% end %>
+          <% if(widget["dataPrefix"]) %> data-prefix=<%= widget["dataPrefix"] %> <% end %>
+        ></div>
+      </li>
+    <% end %>
 
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="welcome" data-view="Text" data-title="Hello" data-text="This is your shiny new dashboard." data-moreinfo="Protip: You can drag the widgets around!"></div>

@@ -10,15 +10,17 @@ ActiveRecord::Base.establish_connection(
   :database => "ruby"
 )
 
-class Test < ActiveRecord::Base
+class Widget < ActiveRecord::Base
 end
 
 # ActiveRecord::Migration.create_table :test do |t|
 #   t.string :name
 # end
 
-# class App < Sinatra::Application
-# end
+class App < Sinatra::Application
+  # @a = 1;
+  # set a, 'sldkjfsldkjf'
+end
 
 # get '/' do
 #   p User.all
@@ -28,15 +30,57 @@ end
 # p.name = 'asldkfj'
 # puts p.name
 
-# a = Test.all
-# a = a.as_json
-# erb :a
+allRecords = Widget.all
+allRecords = allRecords.as_json
+puts allRecords
 
-# get '/hello/' do
-#     erb "test"
+# # get '/hello/' do
+# #     erb "test"
+# # end
+
+# get '/' do
+#   test = "sdlkfjsdlkfj"
+#   erb test
+#   puts test
+
+#   puts a
+
+#   p = Test.new
+#   p.name = 'asldkfj'
+#   puts p.name
+
+#   # :locals => {:test => 'blah'}
+
+#   # set test => 'alskdfj'
 # end
 
-test = "sdlkfjsdlkfj"
+# get '/sample' do
+#   test = "sdlkfjsdlkfj"
+#   erb test
+#   puts test
+
+#   puts a
+
+#   p = Test.new
+#   p.name = 'asldkfj'
+#   puts p.name
+
+#   # :locals => {:test => 'blah'}
+
+#   # set test => 'alskdfj'
+# end
+
+# Sinatra::Application::Bbb = ['
+#     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+#       <div data-id="time" data-view="Clock" data-title="Time" style="background-color:#ff9618"></div>
+#     </li>
+# ',
+# '    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+#       <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$"></div>
+#     </li>
+# ']
+
+Sinatra::Application::DbData = allRecords
 
 current_valuation = 0
 current_karma = 0

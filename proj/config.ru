@@ -16,3 +16,13 @@ map Sinatra::Application.assets_prefix do
 end
 
 run Sinatra::Application
+
+Sinatra::Application::Aaa = ['
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="time" data-view="Clock" data-title="Time" style="background-color:#ff9618"></div>
+    </li>
+',
+'    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$"></div>
+    </li>
+']
