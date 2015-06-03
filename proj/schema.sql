@@ -33,10 +33,43 @@ CREATE TABLE widget_accesses (
 );
 
 INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
-("newWelcome", "Text", "Yo", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+("newWelcome", "Text", "Text1", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text2", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text3", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
 
 INSERT INTO widgets (dataId, dataView, dataTitle, dataMin, dataMax, dataRow, dataCol, dataSizex, dataSizey) values
-("synergy", "Meter", "Hola", 0, 100, 1, 1, 1, 1);
+("synergy", "Meter", "Hola1", 0, 100, 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataMin, dataMax, dataRow, dataCol, dataSizex, dataSizey) values
+("synergy", "Meter", "Hola2", 0, 100, 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataMin, dataMax, dataRow, dataCol, dataSizex, dataSizey) values
+("synergy", "Meter", "Hola3", 0, 100, 1, 1, 1, 1);
 
 INSERT INTO users (email, data) values
 ("eddie@leftfieldlabs.com", "testtesttest");
+
+INSERT INTO users (email, data) values
+("tucanocapoeira@gmail.com", "testtesttest");
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 1);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 2);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 3);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(2, 1);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(2, 2);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(2, 3);
