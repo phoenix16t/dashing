@@ -1,37 +1,44 @@
-require 'openid/store/filesystem'
-require 'omniauth/strategies/google_apps'
+require 'omniauth/strategies/google_oauth2'
 require 'dashing'
+require 'yaml'
+require 'sinatra'
 
 configure do
-  set :auth_token, 'YOUR_AUTH_TOKEN'
+  set :access_token, ENV['AUTH_TOKEN']
+  if Sinatra::Base.development?
+    helpers do
 
-  helpers do
+      def protected!
+        redirect '/auth/google_oauth2' unless session[:user_id]
+      end
 
-    def protected!
-      redirect '/auth/g' unless session[:user_id]
     end
 
-  end
+    use Rack::Session::Cookie, secret: ENV['secret']
 
-  use Rack::Session::Cookie
-  use OmniAuth::Builder do
-    provider :google_apps, :store => OpenID::Store::Filesystem.new('./tmp'), :name => 'g', :domain => 'YOURDOMAIN.com'
-  end
 
-  post '/auth/g/callback' do
-    if auth = request.env['omniauth.auth']
-      session[:user_id] = auth['info']['email']
-      redirect '/'
-    else
-      redirect '/auth/failure'
+    use OmniAuth::Builder do
+      provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV["GOOGLE_CLIENT_SECRET"]
     end
-  end
 
-  get '/auth/failure' do
-    'Nope.'
+    get '/auth/google_oauth2/callback' do
+      if auth = request.env['omniauth.auth']
+        #if auth['info']['email'].split('@')[1] != 'leftfieldlabs.com'
+        #  redirect '/auth/failure'
+        #end
+        session[:user_id] = auth['info']['email']
+        Sinatra::Application::User = auth['info']['email']
+        redirect '/sample'
+      else
+        redirect '/auth/failure'
+      end
+    end
+
+    get '/auth/failure' do
+      'Nope.'
+    end
   end
 end
-
 map Sinatra::Application.assets_prefix do
   run Sinatra::Application.sprockets
 end

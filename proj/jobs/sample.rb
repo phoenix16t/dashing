@@ -6,11 +6,14 @@ ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",
   :host     => "localhost",
   :username => "root",
-  :password => "superman",
+  :password => "lfl",
   :database => "ruby"
 )
 
 class Widget < ActiveRecord::Base
+end
+
+class User < ActiveRecord::Base
 end
 
 # ActiveRecord::Migration.create_table :test do |t|
@@ -29,6 +32,7 @@ end
 # p = Test.new
 # p.name = 'asldkfj'
 # puts p.name
+
 
 allRecords = Widget.all
 allRecords = allRecords.as_json
@@ -84,6 +88,17 @@ Sinatra::Application::DbData = allRecords
 
 current_valuation = 0
 current_karma = 0
+
+user = 0
+
+SCHEDULER.every '1s' do
+  if Sinatra::Application::User != user
+    user = Sinatra::Application::User
+    blah = User.find_by email: user
+    blah = blah.as_json
+    puts "user", blah
+  end
+end
 
 SCHEDULER.every '2s' do
   last_valuation = current_valuation
