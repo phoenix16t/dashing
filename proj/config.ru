@@ -23,9 +23,11 @@ configure do
 
     get '/auth/google_oauth2/callback' do
       if auth = request.env['omniauth.auth']
+
         #if auth['info']['email'].split('@')[1] != 'leftfieldlabs.com'
         #  redirect '/auth/failure'
         #end
+
         session[:user_id] = auth['info']['email']
         Sinatra::Application::User = auth['info']['email']
         redirect '/sample'

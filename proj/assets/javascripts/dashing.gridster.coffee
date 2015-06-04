@@ -34,4 +34,5 @@ $ ->
   $('#save-gridster').leanModal()
 
   $('#save-gridster').click ->
+    console.log("dash ", $('#gridster-code').text())
     $('#save-gridster').slideUp()

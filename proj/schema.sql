@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS widgets;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS widget_accesses;
 
 CREATE TABLE widgets (
 	widgetId int NOT NULL AUTO_INCREMENT,
@@ -66,10 +67,19 @@ INSERT INTO widget_accesses (userId, widgetId) values
 (1, 3);
 
 INSERT INTO widget_accesses (userId, widgetId) values
-(2, 1);
+(2, 4);
 
 INSERT INTO widget_accesses (userId, widgetId) values
-(2, 2);
+(2, 5);
 
 INSERT INTO widget_accesses (userId, widgetId) values
-(2, 3);
+(2, 6);
+
+select * from users u, widget_accesses wa, widgets w
+where u.userId = wa.userId
+and wa.widgetId = w.widgetId
+
+select * from users u, widget_accesses wa, widgets w
+    where u.userId = wa.userId
+    and wa.widgetId = w.widgetId
+    and u.email ="eddie@leftfieldlabs.com"
