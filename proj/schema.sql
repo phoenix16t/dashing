@@ -30,8 +30,11 @@ CREATE TABLE users (
 );
 
 CREATE TABLE widget_accesses (
+	accessId int NOT NULL AUTO_INCREMENT,
 	userId int NOT NULL,
-	widgetId int NOT NULL
+	widgetId int NOT NULL,
+	opened boolean NOT NULL DEFAULT false,
+	PRIMARY KEY (accessId)
 );
 
 INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
@@ -52,6 +55,24 @@ INSERT INTO widgets (dataId, dataView, dataTitle, dataMin, dataMax, dataRow, dat
 INSERT INTO widgets (dataId, dataView, dataTitle, dataMin, dataMax, dataRow, dataCol, dataSizex, dataSizey) values
 ("synergy", "Meter", "Hola3", 0, 100, 1, 1, 1, 1);
 
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text4", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text5", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text6", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text7", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text8", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
+INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("newWelcome", "Text", "Text9", "blah blah blah", "even more blah blah balh", 1, 1, 1, 1);
+
 INSERT INTO users (email, data) values
 ("eddie@leftfieldlabs.com", "testtesttest");
 
@@ -61,8 +82,8 @@ INSERT INTO users (email, data) values
 INSERT INTO widget_accesses (userId, widgetId) values
 (1, 1);
 
-INSERT INTO widget_accesses (userId, widgetId) values
-(1, 2);
+INSERT INTO widget_accesses (userId, widgetId, opened) values
+(1, 2, 1);
 
 INSERT INTO widget_accesses (userId, widgetId) values
 (1, 3);
@@ -76,11 +97,32 @@ INSERT INTO widget_accesses (userId, widgetId) values
 INSERT INTO widget_accesses (userId, widgetId) values
 (2, 6);
 
-select * from users u, widget_accesses wa, widgets w
-where u.userId = wa.userId
-and wa.widgetId = w.widgetId
+INSERT INTO widget_accesses (userId, widgetId, opened) values
+(1, 7, 1);
 
-select * from users u, widget_accesses wa, widgets w
-    where u.userId = wa.userId
-    and wa.widgetId = w.widgetId
-    and u.email ="eddie@leftfieldlabs.com"
+INSERT INTO widget_accesses (userId, widgetId, opened) values
+(1, 8, 1);
+
+INSERT INTO widget_accesses (userId, widgetId, opened) values
+(1, 9, 1);
+
+INSERT INTO widget_accesses (userId, widgetId, opened) values
+(1, 10, 1);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 11);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 12);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 4);
+
+--select * from users u, widget_accesses wa, widgets w
+--where u.userId = wa.userId
+--and wa.widgetId = w.widgetId
+
+--select * from users u, widget_accesses wa, widgets w
+    --where u.userId = wa.userId
+    --and wa.widgetId = w.widgetId
+    --and u.email ="eddie@leftfieldlabs.com"
