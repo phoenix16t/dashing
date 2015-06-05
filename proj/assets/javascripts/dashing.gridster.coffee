@@ -21,7 +21,6 @@ Dashing.showGridsterInstructions = ->
 
   unless JSON.stringify(newWidgetPositions) == JSON.stringify(Dashing.currentWidgetPositions)
     Dashing.currentWidgetPositions = newWidgetPositions
-    $('#save-gridster').slideDown()
     $('#gridster-code').text("
       <script type='text/javascript'>\n
       $(function() {\n
@@ -29,10 +28,13 @@ Dashing.showGridsterInstructions = ->
       });\n
       </script>
     ")
+    caller($('#gridster-code').text())
 
-$ ->
-  $('#save-gridster').leanModal()
 
-  $('#save-gridster').click ->
-    console.log("dash ", $('#gridster-code').text())
-    $('#save-gridster').slideUp()
+caller = (layout) ->
+  email = $('.name').data('value')
+  $.ajax
+    url: 'http://localhost:3030/fix_layout'
+    type: 'POST'
+    dataType: 'html'
+    data: {email: email, layout: layout}

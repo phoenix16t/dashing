@@ -13,39 +13,23 @@ ActiveRecord::Base.establish_connection(
 class User < ActiveRecord::Base
 end
 
-Sinatra::Application::DbData = []
-Sinatra::Application::User = 'User'
-user = 'User'
+Sinatra::Application::DbData = User.find_by_sql(
+  'select * from users u, widget_accesses wa, widgets w
+  where u.userId = wa.userId
+  and wa.widgetId = w.widgetId')
 
-refresh = false
+Sinatra::Application::Layout = User.find_by_sql(
+  'select * from users')
 
-SCHEDULER.every '1s' do
-  if Sinatra::Application::User != user
+post '/fix_layout' do
+  email = params[:email]
+  layout = params[:layout]
+  user = User.find_by(email: email)
+  user.layout = layout
+  user.save
 
-    refresh = user == 'User' ? 'slow' : 'fast'
-
-    user = Sinatra::Application::User
-
-    allRecords = User.find_by_sql('select * from users u, widget_accesses wa, widgets w
-    where u.userId = wa.userId
-    and wa.widgetId = w.widgetId
-    and u.email ="' + user + '"')
-    Sinatra::Application::DbData = allRecords.as_json
-  end
-end
-
-SCHEDULER.every '5s' do
-  if refresh == 'slow'
-    send_event('blah', {event: 'reload', dashboard: 'sample'}, 'dashboards')
-    refresh = false
-  end
-end
-
-SCHEDULER.every '1s' do
-  if refresh == 'fast'
-    send_event('blah', {event: 'reload', dashboard: 'sample'}, 'dashboards')
-    refresh = false
-  end
+  Sinatra::Application::Layout = User.find_by_sql(
+    'select * from users')
 end
 
 

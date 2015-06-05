@@ -29,7 +29,6 @@ configure do
         #end
 
         session[:user_id] = auth['info']['email']
-        Sinatra::Application::User = auth['info']['email']
         redirect '/sample'
       else
         redirect '/auth/failure'

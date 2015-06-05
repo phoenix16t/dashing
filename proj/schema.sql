@@ -25,6 +25,7 @@ CREATE TABLE users (
 	userId int NOT NULL AUTO_INCREMENT,
 	email varchar(30) NOT NULL,
 	data varchar(20),
+	layout text,
 	PRIMARY KEY (userId)
 );
 
