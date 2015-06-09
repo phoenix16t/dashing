@@ -4,11 +4,19 @@
 
 <div class="gridster">
   <ul>
+
+    <li data-row='1' data-col='1' data-sizex='1' data-sizey='1'>
+      <div data-id="chuck" data-view="Text" data-title="Team Facts" data-moreinfo="Team Member Facts.">
+    </li>
+
     <% DbData.each do |widget| %>
       <% if widget["email"] == session[:user_id] && widget["opened"] == 1 %>
         <li data-row=<%= widget["dataRow"] %> data-col=<%= widget["dataCol"] %> data-sizex=<%= widget["dataSizex"] %> data-sizey=<%= widget["dataSizey"] %>>
           <div class="closer" onClick="toggle_widget(<%= widget["userId"] %>, <%= widget["widgetId"] %>, false)">X</div>
-          <div data-id=<%= widget["dataId"] %> data-view=<%= widget["dataView"] %> data-title=<%= widget["dataTitle"] %>
+
+          <div data-view=<%= widget["dataView"] %>
+            <% if widget["dataId"] %> data-id='<%= widget["dataId"] %>' <% end %>
+            <% if widget["dataTitle"] %> data-title='<%= widget["dataTitle"] %>' <% end %>
             <% if widget["dataText"] %> data-text='<%= widget["dataText"] %>' <% end %>
             <% if widget["dataMoreinfo"] %> data-moreinfo='<%= widget["dataMoreinfo"] %>' <% end %>
             <% if widget["dataMin"] %> data-min=<%= widget["dataMin"] %> <% end %>
@@ -17,6 +25,7 @@
             <% if widget["style"] %> style='<%= widget["style"] %>' <% end %>
             <% if widget["dataPrefix"] %> data-prefix=<%= widget["dataPrefix"] %> <% end %>
           ></div>
+
         </li>
       <% end %>
     <% end %>

@@ -3,11 +3,11 @@ require 'active_record'
 require 'mysql2'
 
 ActiveRecord::Base.establish_connection(
-  :adapter  => "mysql2",
-  :host     => "localhost",
-  :username => "",
-  :password => "",
-  :database => "test"
+  :adapter  => 'mysql2',
+  :host     => 'localhost',
+  :username => '',
+  :password => '',
+  :database => 'test'
 )
 
 class User < ActiveRecord::Base
@@ -23,7 +23,6 @@ Sinatra::Application::DbData = User.find_by_sql(
 
 Sinatra::Application::Layout = User.find_by_sql(
   'select * from users')
-
 
 post '/fix_layout' do
   email = params[:email]
@@ -55,7 +54,7 @@ post '/set_widget' do
     where u.userId = wa.userId
     and wa.widgetId = w.widgetId')
 
-  send_event('refresh_dashboard', {event: 'reload', dashboard: 'sample'}, 'dashboards')
+  'Refresh'
 end
 
 current_valuation = 0

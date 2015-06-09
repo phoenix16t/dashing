@@ -114,6 +114,7 @@ h3 {
 // ----------------------------------------------------------------------------
 .gridster {
   margin: 0px auto;
+  width: 1400px !important;
 }
 
 .icon-background {
@@ -134,6 +135,8 @@ h3 {
 
 .gridster ul {
   list-style: none;
+  width: 1240px;
+  float: left;
 }
 
 .gs_w {
@@ -247,14 +250,15 @@ h3 {
   padding-top: 5px;
 }
 
-.scroll {
+ul.scroll {
   height: 300px;
   width: 150px;
   float: right;
+  padding-top: 4px;
   overflow-y: scroll;
-  border: 1px solid red;
   li {
     margin-bottom: 5px;
+    background-color: #404040;
   }
 }
 

@@ -8,5 +8,10 @@ function toggle_widget(userId, widgetId, isOpened) {
 			widgetId: widgetId,
 			isOpened: isOpened
 		}
+	})
+	.done(function(response, textStatus, jqXHR) {
+		if(response === 'Refresh') {
+			location.reload();
+		}
 	});
 }
