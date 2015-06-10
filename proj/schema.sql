@@ -124,6 +124,9 @@ INSERT INTO widgets (dataId, dataView, dataTitle, dataText, dataMoreinfo, dataRo
 INSERT INTO widgets (dataView, dataTitle, dataRow, dataCol, dataSizex, dataSizey) values
 ("Myclock", "Clock", 1, 1, 1, 1);
 
+INSERT INTO widgets (dataId, dataView, dataTitle, dataMoreinfo, dataRow, dataCol, dataSizex, dataSizey) values
+("chuck", "Text", "Chuck Facts", "Team Member Facts", 1, 1, 2, 1);
+
 INSERT INTO users (email, data) values
 ("eddie@leftfieldlabs.com", "testtesttest");
 
@@ -219,6 +222,9 @@ INSERT INTO widget_accesses (userId, widgetId) values
 
 INSERT INTO widget_accesses (userId, widgetId) values
 (1, 29);
+
+INSERT INTO widget_accesses (userId, widgetId) values
+(1, 30);
 
 --select * from users u, widget_accesses wa, widgets w
 --where u.userId = wa.userId
