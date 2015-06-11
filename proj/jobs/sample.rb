@@ -5,9 +5,9 @@ require 'mysql2'
 ActiveRecord::Base.establish_connection(
   :adapter  => 'mysql2',
   :host     => 'localhost',
-  :username => '',
+  :username => 'root',
   :password => '',
-  :database => 'test'
+  :database => 'ruby'
 )
 
 class User < ActiveRecord::Base
@@ -16,43 +16,33 @@ end
 class Widget_Access < ActiveRecord::Base
 end
 
-Sinatra::Application::DbData = User.find_by_sql(
-  'select * from users u, widget_accesses wa, widgets w
-  where u.userId = wa.userId
-  and wa.widgetId = w.widgetId')
-
-Sinatra::Application::Layout = User.find_by_sql(
-  'select * from users')
-
-post '/fix_layout' do
+post '/fetch_layout' do
   email = params[:email]
-  layout = params[:layout]
-  user = User.find_by(email: email)
-  user.layout = layout
-  user.save
+  data = User.find_by_sql(
+  'select * from users u, widget_accesses wa, widgets w
+  where u.email = "' + email + '" and u.userId = wa.userId and wa.widgetId = w.widgetId')
 
-  Sinatra::Application::Layout = User.find_by_sql(
-    'select * from users')
+  halt 200, {email: email, data: data}.to_json
 end
 
-post '/set_widget' do
+post '/fix_layout' do
+  userId = params[:userId]
+  layout = params[:layout]
+  user = User.find_by(userId: userId)
+  user.layout = layout
+  user.save
+end
+
+post '/activate_widget' do
   userId = params[:userId]
   widgetId = params[:widgetId]
-  isOpened = params[:isOpened]
+  isActivated = params[:isActivated]
   user = User.find_by(userId: userId)
   user.layout = ''
   user.save
   wa = Widget_Access.find_by(userId: userId, widgetId: widgetId)
-  wa.opened = isOpened
+  wa.activated = isActivated
   wa.save
-
-  Sinatra::Application::Layout = User.find_by_sql(
-    'select * from users')
-
-  Sinatra::Application::DbData = User.find_by_sql(
-    'select * from users u, widget_accesses wa, widgets w
-    where u.userId = wa.userId
-    and wa.widgetId = w.widgetId')
 
   'Refresh'
 end

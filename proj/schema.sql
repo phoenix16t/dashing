@@ -33,7 +33,7 @@ CREATE TABLE widget_accesses (
 	accessId int NOT NULL AUTO_INCREMENT,
 	userId int NOT NULL,
 	widgetId int NOT NULL,
-	opened boolean NOT NULL DEFAULT false,
+	activated boolean NOT NULL DEFAULT false,
 	PRIMARY KEY (accessId)
 );
 
@@ -136,7 +136,7 @@ INSERT INTO users (email, data) values
 INSERT INTO widget_accesses (userId, widgetId) values
 (1, 1);
 
-INSERT INTO widget_accesses (userId, widgetId, opened) values
+INSERT INTO widget_accesses (userId, widgetId, activated) values
 (1, 2, 1);
 
 INSERT INTO widget_accesses (userId, widgetId) values
@@ -151,16 +151,16 @@ INSERT INTO widget_accesses (userId, widgetId) values
 INSERT INTO widget_accesses (userId, widgetId) values
 (2, 6);
 
-INSERT INTO widget_accesses (userId, widgetId, opened) values
+INSERT INTO widget_accesses (userId, widgetId, activated) values
 (1, 7, 1);
 
-INSERT INTO widget_accesses (userId, widgetId, opened) values
+INSERT INTO widget_accesses (userId, widgetId, activated) values
 (1, 8, 1);
 
-INSERT INTO widget_accesses (userId, widgetId, opened) values
+INSERT INTO widget_accesses (userId, widgetId, activated) values
 (1, 9, 1);
 
-INSERT INTO widget_accesses (userId, widgetId, opened) values
+INSERT INTO widget_accesses (userId, widgetId, activated) values
 (1, 10, 1);
 
 INSERT INTO widget_accesses (userId, widgetId) values
@@ -228,9 +228,9 @@ INSERT INTO widget_accesses (userId, widgetId) values
 
 --select * from users u, widget_accesses wa, widgets w
 --where u.userId = wa.userId
---and wa.widgetId = w.widgetId
+--and wa.widgetId = w.widgetId;
 
 --select * from users u, widget_accesses wa, widgets w
     --where u.userId = wa.userId
     --and wa.widgetId = w.widgetId
-    --and u.email ="eddie@leftfieldlabs.com"
+    --and u.email ="eddie@leftfieldlabs.com";

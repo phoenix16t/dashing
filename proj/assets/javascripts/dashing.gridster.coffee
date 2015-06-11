@@ -29,15 +29,3 @@ Dashing.showGridsterInstructions = ->
       </script>
     ")
     fix_layout($('#gridster-code').text())
-
-
-fix_layout = (layout) ->
-  email = $('.name').data('value')
-  $.ajax
-    url: 'http://localhost:3030/fix_layout'
-    type: 'POST'
-    dataType: 'html'
-    data: {
-      email: email,
-      layout: layout
-    }

@@ -3,7 +3,15 @@
 <div class="name" data-value="<%= session[:user_id] %>">Hello <%= session[:user_id]%></div>
 
 <div class="gridster">
-  <ul>
+  <ul class="widgetContainer">
+<!--
+<script type='text/javascript'>
+    document.write('<li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="gs_w"><div data-id="synergy" data-view="Meter" data-title="Hola1" data-min="0" data-max="100"></div></li>');
+</script>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="gs_w">
+      <div data-id="synergy" data-view="Meter" data-title="Hola1" data-min="0" data-max="100"></div>
+    </li>
 
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="git_issues_labeled_defects" data-view="Graph" data-title="Issue Count"></div>
@@ -33,43 +41,17 @@
       <div data-id="aww" data-view="RandomAww"></div>
     </li>
 
-    <% DbData.each do |widget| %>
-      <% if widget["email"] == session[:user_id] && widget["opened"] == 1 %>
-        <li data-row=<%= widget["dataRow"] %> data-col=<%= widget["dataCol"] %> data-sizex=<%= widget["dataSizex"] %> data-sizey=<%= widget["dataSizey"] %>>
-          <div class="closer" onClick="toggle_widget(<%= widget["userId"] %>, <%= widget["widgetId"] %>, false)">X</div>
 
-          <div data-view=<%= widget["dataView"] %>
-            <% if widget["dataId"] %> data-id='<%= widget["dataId"] %>' <% end %>
-            <% if widget["dataTitle"] %> data-title='<%= widget["dataTitle"] %>' <% end %>
-            <% if widget["dataText"] %> data-text='<%= widget["dataText"] %>' <% end %>
-            <% if widget["dataMoreinfo"] %> data-moreinfo='<%= widget["dataMoreinfo"] %>' <% end %>
-            <% if widget["dataMin"] %> data-min=<%= widget["dataMin"] %> <% end %>
-            <% if widget["dataMax"] %> data-max=<%= widget["dataMax"] %> <% end %>
-            <% if widget["dataUnordered"] %> data-unordered=<%= widget["dataUnordered"] %> <% end %>
-            <% if widget["style"] %> style='<%= widget["style"] %>' <% end %>
-            <% if widget["dataPrefix"] %> data-prefix=<%= widget["dataPrefix"] %> <% end %>
-          ></div>
 
-        </li>
-      <% end %>
-    <% end %>
+  -->
   </ul>
 
-  <ul class="scroll">
-    <% DbData.each do |widget| %>
-      <% if widget["email"] == session[:user_id] && widget["opened"] == 0 %>
-        <li onClick="toggle_widget(<%= widget["userId"] %>, <%= widget["widgetId"] %>, true)">
-          <%= widget["dataTitle"] %>
-        </li>
-      <% end %>
-    <% end %>
+  <ul class="scrollContainer">
   </ul>
+
+  <script type="text/javascript">
+     renderFromServer("<%= session[:user_id] %>");
+  </script>
 
   <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
 </div>
-
-<% Layout.each do |user| %>
-  <% if(user["email"]) == session[:user_id] %>
-    <%= user["layout"] %>
-  <% end %>
-<% end %>
