@@ -28,4 +28,4 @@ Dashing.showGridsterInstructions = ->
       });\n
       </script>
     ")
-    fix_layout($('#gridster-code').text())
+    fixLayout($('#gridster-code').text())

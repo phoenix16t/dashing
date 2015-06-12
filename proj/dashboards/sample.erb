@@ -1,6 +1,10 @@
 <% content_for :title do %>My super sweet dashboard<% end %>
 
-<div class="name" data-value="<%= session[:user_id] %>">Hello <%= session[:user_id]%></div>
+<div class="topbar">
+  <div class="name" data-value="<%= session[:user_id] %>">Hello <%= session[:user_id]%></div>
+  <h1 class="header">asdf</h1>
+  <div class="backButton"></div>
+</div>
 
 <div class="gridster">
   <ul class="widgetContainer">
@@ -53,5 +57,5 @@
      renderFromServer("<%= session[:user_id] %>");
   </script>
 
-  <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
+<!--   <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center> -->
 </div>

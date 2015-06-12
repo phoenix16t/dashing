@@ -16,21 +16,32 @@ end
 class Widget_Access < ActiveRecord::Base
 end
 
-post '/fetch_layout' do
-  email = params[:email]
-  data = User.find_by_sql(
-  'select * from users u, widget_accesses wa, widgets w
-  where u.email = "' + email + '" and u.userId = wa.userId and wa.widgetId = w.widgetId')
-
-  halt 200, {email: email, data: data}.to_json
+class Widget < ActiveRecord::Base
 end
 
-post '/fix_layout' do
+post '/fetch_layout' do
+  email = params[:email]
+  user = User.find_by(email: email)
+  parent = Widget.find_by(widgetId: user.currentDash);
+  widgets = Widget_Access.find_by_sql(
+    'select wa.*, w.* from users u, widget_accesses wa, widgets w' +
+    ' where u.userId = ' + user.userId.to_s +
+    ' and u.userId = wa.userId' +
+    ' and wa.widgetId = w.widgetId' +
+    ' and u.currentDash = w.parentId'
+  )
+
+  halt 200, {user: user, parent: parent, widgets: widgets}.to_json
+end
+
+post '/change_dashboard' do
   userId = params[:userId]
-  layout = params[:layout]
+  widgetId = params[:widgetId]
   user = User.find_by(userId: userId)
-  user.layout = layout
+  user.currentDash = widgetId
   user.save
+
+  'Refresh'
 end
 
 post '/activate_widget' do
@@ -45,6 +56,14 @@ post '/activate_widget' do
   wa.save
 
   'Refresh'
+end
+
+post '/fix_layout' do
+  userId = params[:userId]
+  layout = params[:layout]
+  user = User.find_by(userId: userId)
+  user.layout = layout
+  user.save
 end
 
 current_valuation = 0

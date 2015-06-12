@@ -250,6 +250,18 @@ h3 {
   padding-top: 5px;
 }
 
+.topbar {
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+}
+
 ul.scrollContainer {
   height: 300px;
   width: 150px;
@@ -266,6 +278,12 @@ ul.scrollContainer {
   position: absolute;
   top: 0px;
   right: 10px;
+}
+
+.entrance {
+  position: absolute;
+  top: 0px;
+  right: 40px;
 }
 
 
