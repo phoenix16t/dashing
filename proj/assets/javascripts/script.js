@@ -12,20 +12,23 @@ function renderFromServer(email) {
 	})
 	.success(function(response, status, jqXHR) {
 		var reply = JSON.parse(response);
-    var dashboardId = reply.user.currentDash;
-    var parentId = reply.parent ? reply.parent.parentId : 0;
-    var pageTitle = reply.parent ? reply.parent.dataTitle : 'My Dashboard';
-    userId = reply.user.userId;
+		var dashboardId = reply.user.currentDash;
+		var parentId = reply.parent ? reply.parent.parentId : 0;
+		var pageTitle = reply.parent ? reply.parent.dataTitle : 'My Dashboard';
+		userId = reply.user.userId;
 
-    if(dashboardId !== 0) {
-      $('.backButton').text('Back')
-        .attr({'onClick': 'changeDashboard(' + parentId + ')'});
-    }
+		// render back button
+		if(dashboardId !== 0) {
+			$('.backButton').text('Back').attr({'onClick': 'changeDashboard(' + parentId + ')'});
+		}
 
-    $('.gridster').append(reply.user.layout);
+		// append saved layout
+		$('.gridster').append(reply.user.layout);
 
-    $('h1.header').text(pageTitle);
+		// render page title
+		$('h1.header').text(pageTitle);
 
+		// render activated widgets and links for deactivated widgets
 		reply.widgets.forEach(function(line) {
 			if(line.activated) {
 				var widgetOuter = $(document.createElement('li'))
@@ -34,21 +37,21 @@ function renderFromServer(email) {
 					.attr({'data-sizex': line.dataSizex})
 					.attr({'data-sizey': line.dataSizey});
 
-        if(line.isParent) {
-          var link = 'changeDashboard(' + line.widgetId + ')';
-          var widgetOpener = $(document.createElement('div'))
+				if(line.isParent) {
+					var link = 'changeDashboard(' + line.widgetId + ')';
+					var widgetOpener = $(document.createElement('div'))
 						.attr({'class': 'entrance'})
 						.attr({'onClick': link});
-	        widgetOpener.text('I');
-	        widgetOuter.append(widgetOpener);
-		    }
+					widgetOpener.text('I');
+					widgetOuter.append(widgetOpener);
+				}
 
-        var link = 'activateWidget(' + line.widgetId + ',false)';
-        var widgetCloser = $(document.createElement('div'))
+				var link = 'activateWidget(' + line.widgetId + ',false)';
+				var widgetCloser = $(document.createElement('div'))
 					.attr({'class': 'closer'})
 					.attr({'onClick': link});
-        widgetCloser.text('X');
-        widgetOuter.append(widgetCloser);
+				widgetCloser.text('X');
+				widgetOuter.append(widgetCloser);
 
 				var widgetData = $(document.createElement('div'))
 					.attr({'data-view': line.dataView});
@@ -64,14 +67,14 @@ function renderFromServer(email) {
 				widgetOuter.append(widgetData);
 
 				$('.widgetContainer').append(widgetOuter);
-	    }
-	    else if(!line.activated) {
+			}
+			else if(!line.activated) {
 				var link = 'activateWidget(' + line.widgetId + ',true)';
 				var widgetOuter = $(document.createElement('li'))
 					.attr({'onClick': link});
 				widgetOuter.text(line.dataTitle);
 				$('.scrollContainer').append(widgetOuter);
-	    }
+			}
 		});
 	});
 }
@@ -112,13 +115,13 @@ function activateWidget(widgetId, isActivated) {
 }
 
 function fixLayout(layout) {
-  return $.ajax({
-    url: 'http://localhost:3030/fix_layout',
-    type: 'POST',
-    dataType: 'html',
-    data: {
-      userId: userId,
-      layout: layout
-    }
-  });
+	$.ajax({
+		url: 'http://localhost:3030/fix_layout',
+		type: 'POST',
+		dataType: 'html',
+		data: {
+			userId: userId,
+			layout: layout
+		}
+	});
 };

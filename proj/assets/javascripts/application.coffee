@@ -23,13 +23,3 @@ Dashing.on 'ready', ->
       draggable:
         stop: Dashing.showGridsterInstructions
         start: -> Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
-
-Dashing.on 'alert', ->
-  test = $(document.createElement('li'))
-    .attr('data-row': 1)
-    .attr('data-col': 1)
-    .attr('data-sizex': 1)
-    .attr('data-sizey': 1)
-  test.append '<div data-id="buzzwords" data-view="List" data-unordered="true" data-title="Buzzwords" data-moreinfo="# of times said around the office"></div>'
-  $('.gridster ul').append test
-  console.log("Woot!", $('.gridster ul:first'))
