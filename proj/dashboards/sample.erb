@@ -7,7 +7,7 @@
 </div>
 
 <div class="gridster">
-  <ul class="widgetContainer">
+  <ul class="dashboard">
 <!--
 <script type='text/javascript'>
     document.write('<li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="gs_w"><div data-id="synergy" data-view="Meter" data-title="Hola1" data-min="0" data-max="100"></div></li>');
@@ -44,18 +44,20 @@
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="aww" data-view="RandomAww"></div>
     </li>
-
-
-
   -->
   </ul>
 
-  <ul class="scrollContainer">
+  <ul class="hiddenDashboard">
   </ul>
-
-  <script type="text/javascript">
-     fetchLayout("<%= session[:user_id] %>");
-  </script>
 
 <!--   <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center> -->
 </div>
+
+<div class="scroller">
+  <ul class="scrollContainer">
+  </ul>
+</div>
+
+<script type="text/javascript">
+   fetchLayout("<%= session[:user_id] %>");
+</script>

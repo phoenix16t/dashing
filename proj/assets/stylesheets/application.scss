@@ -114,7 +114,6 @@ h3 {
 // ----------------------------------------------------------------------------
 .gridster {
   margin: 0px auto;
-  width: 1400px !important;
 }
 
 .icon-background {
@@ -135,8 +134,6 @@ h3 {
 
 .gridster ul {
   list-style: none;
-  width: 1240px;
-  float: left;
 }
 
 .gs_w {
@@ -250,26 +247,45 @@ h3 {
   padding-top: 5px;
 }
 
+
+#container {
+  text-align: center;
+}
+
 .topbar {
   height: 100px;
   width: 100%;
   padding: 10px;
   background-color: #444;
+  text-align: left;
 }
 
 .header {
   width: 100%;
-  text-align: center;
+}
+
+.gridster, .scroller {
+  display: inline-block;
+}
+
+.hiddenDashboard {
+  display: none;
+  background-color: red;
+}
+
+.scroller {
+  vertical-align: top;
 }
 
 ul.scrollContainer {
   height: 300px;
   width: 150px;
-  float: right;
-  padding-top: 4px;
+  /*padding-top: 4px;*/
   overflow-y: scroll;
+  border: 1px solid #404040;
   li {
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
+    margin: 5px;
     background-color: #404040;
   }
 }

@@ -27,8 +27,7 @@ post '/fetch_layout' do
     'select wa.*, w.* from users u, widget_accesses wa, widgets w' +
     ' where u.userId = ' + user.userId.to_s +
     ' and u.userId = wa.userId' +
-    ' and wa.widgetId = w.widgetId' +
-    ' and u.currentDash = w.parentId'
+    ' and wa.widgetId = w.widgetId'
   )
 
   halt 200, {user: user, parent: parent, widgets: widgets}.to_json
